@@ -9,7 +9,6 @@ class CartDetailsModel {
     total = json['data']['total'];
     json['data']['cart_items'].forEach((e) {
       items.add(CartItemsModel.fromJson(e));
-
     });
   }
 }

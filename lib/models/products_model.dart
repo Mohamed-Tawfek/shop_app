@@ -13,8 +13,8 @@ class ProductModel {
     inCart = json['in_cart'];
   }
   late num id;
-  late num discount;
-  late num oldPrice;
+  late var discount;
+  late var oldPrice;
   late num price;
   late String mainImage;
   late String name;
@@ -25,19 +25,15 @@ class ProductModel {
 }
 
 class ProductsModel {
-  ProductsModel.fromJson(Map<String, dynamic> json,) {
-
+  ProductsModel.fromJson(
+    Map<String, dynamic> json,
+  ) {
     status = json['status'];
     json['data']['products'].forEach((e) {
       products.add(ProductModel.fromJson(e));
     });
-
-
   }
 
   late bool status;
   late List<ProductModel> products = [];
-
 }
-
-

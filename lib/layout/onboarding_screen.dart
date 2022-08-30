@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shop_app/modules/login_screen.dart';
-import 'package:shop_app/shared/component/constans.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -31,7 +30,7 @@ class OnBoardingScreen extends StatelessWidget {
         appBar: AppBar(
           actions: [
             TextButton(
-                onPressed:(){
+                onPressed: () {
                   skipOnBoardingScreen(context);
                 },
                 child: const Text(

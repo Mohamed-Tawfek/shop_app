@@ -25,7 +25,7 @@ class CartCubit extends Cubit<CartState> {
     });
   }
 
-  Future<void> deleteFromCart({required num? productId}) async{
+  Future<void> deleteFromCart({required num? productId}) async {
     DioHelper.postData(
             endPoint: addOrRemoveCartEndPoint,
             data: {'product_id': productId},
@@ -41,13 +41,11 @@ class CartCubit extends Cubit<CartState> {
     });
   }
 
-  void deleteCart() async{
+  void deleteCart() async {
     // I had to loop on all items ,
     // because delete cart endpoint does not work!
-    cartDetails!.items.forEach((element)async {
-     await deleteFromCart(productId: element.product!.id);
+    cartDetails!.items.forEach((element) async {
+      await deleteFromCart(productId: element.product!.id);
     });
-
-
   }
 }

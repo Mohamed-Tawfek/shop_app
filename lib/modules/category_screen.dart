@@ -4,10 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubits/category_cubit/category_cubit.dart';
 import 'package:shop_app/modules/view_category_details_screen.dart';
 import 'package:shop_app/shared/component/component.dart';
-import 'package:shop_app/shared/styles/colors.dart';
-
-import '../cubits/home_screen_cubit/home_screen_cubit.dart';
-import '../cubits/home_screen_cubit/home_screen_state.dart';
 import '../models/category_model.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -52,8 +48,10 @@ class CategoryScreen extends StatelessWidget {
           left: 15,
         ),
         child: InkWell(
-          onTap: (){
-            navigateTo(screen: ViewCategoryDetailsScreen(id:model.id ), context: context);
+          onTap: () {
+            navigateTo(
+                screen: ViewCategoryDetailsScreen(id: model.id),
+                context: context);
           },
           child: Container(
             color: Colors.grey[100],
@@ -66,12 +64,12 @@ class CategoryScreen extends StatelessWidget {
                     height: 100,
                     width: 100,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10.0,
                   ),
                   Expanded(
                     child: Text(model.name.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 40.0,
                           fontWeight: FontWeight.w900,
                         )),

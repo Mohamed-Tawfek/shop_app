@@ -14,12 +14,13 @@ Widget defaultTextField(
         void Function(String)? onFieldSubmitted,
         bool enabled = true,
         required String? Function(String?)? validator,
-        required String hintText,
+        required String labelText,
         bool obscureText = false,
         Widget? prefixIcon,
         Widget? suffixIcon,
         TextInputType? keyboardType}) =>
     TextFormField(
+      style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w500),
       controller: controller,
       onChanged: onChanged,
       enabled: enabled,
@@ -28,7 +29,7 @@ Widget defaultTextField(
       keyboardType: keyboardType,
       onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
-          hintText: hintText,
+          label: Text(labelText),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
@@ -69,9 +70,10 @@ navigateTo({required Widget screen, required context}) => Navigator.push(
 
 navigateToAndFinish({required Widget screen, required context}) =>
     Navigator.pushAndRemoveUntil(
-        context,
-        PageTransition(type: PageTransitionType.leftToRight, child: screen),
-        (route) => false);
+      context,
+      PageTransition(type: PageTransitionType.leftToRight, child: screen),
+      (route) => false,
+    );
 
 enum AlertToast { success, error }
 
@@ -93,7 +95,9 @@ Future<bool?> buildAlertToast(
 }
 
 Widget buildViewProductsUi(
-    {required List<ProductModel> model, required context,  bool forHomeScreen=true}) {
+    {required List<ProductModel> model,
+    required context,
+    bool forHomeScreen = true}) {
   return Container(
     color: Colors.grey[300],
     child: GridView.count(
@@ -104,14 +108,16 @@ Widget buildViewProductsUi(
       // top is opposite in childAspectRatio
       childAspectRatio: 0.982 / 1.7,
       mainAxisSpacing: 3,
-      children: List.generate(model.length,
-          (index) => buildProductItemUi(model[index], context, index,forHomeScreen:forHomeScreen)),
+      children: List.generate(
+          model.length,
+          (index) => buildProductItemUi(model[index], context, index,
+              forHomeScreen: forHomeScreen)),
     ),
   );
 }
 
 Widget buildProductItemUi(ProductModel model, context, index,
-    {required bool forHomeScreen }) {
+    {required bool forHomeScreen}) {
   return InkWell(
     onTap: () {
       navigateTo(
@@ -122,9 +128,9 @@ Widget buildProductItemUi(ProductModel model, context, index,
     },
     child: Container(
       color: Colors.white,
-      padding: EdgeInsetsDirectional.all(5),
+      padding: const EdgeInsetsDirectional.all(5),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Stack(
             alignment: Alignment.bottomLeft,
@@ -135,15 +141,15 @@ Widget buildProductItemUi(ProductModel model, context, index,
               ),
               if (model.discount != 0)
                 Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                  color: Colors.red,
+                  child: const Padding(
+                    padding: EdgeInsets.all(5.0),
                     child: Text(
                       'Discount',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                   ),
-                  color: Colors.red,
                 ),
             ],
           ),
@@ -152,7 +158,7 @@ Widget buildProductItemUi(ProductModel model, context, index,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 3.0,
                 ),
                 Text(
@@ -161,7 +167,7 @@ Widget buildProductItemUi(ProductModel model, context, index,
                   maxLines: 2,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Row(
@@ -170,16 +176,16 @@ Widget buildProductItemUi(ProductModel model, context, index,
                       '${model.price.round()} EGP ',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: primarySwatchColor),
                     ),
-                    if (model.discount != 0)
+                    if (model.discount != 0 && model.discount != null)
                       Text(
                         '${model.oldPrice.round()} EGP ',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.grey,
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.lineThrough),
@@ -200,13 +206,13 @@ Widget buildProductItemUi(ProductModel model, context, index,
                         }
                       },
                       icon: CircleAvatar(
+                        backgroundColor: Colors.grey[300]!.withOpacity(0.7),
                         child: Icon(
                           model.inCart == false
                               ? Icons.add_shopping_cart
                               : Icons.done,
                           color: primarySwatchColor,
                         ),
-                        backgroundColor: Colors.grey[300]!.withOpacity(0.7),
                       ),
                     ),
                     IconButton(
@@ -220,10 +226,10 @@ Widget buildProductItemUi(ProductModel model, context, index,
                         }
                       },
                       icon: CircleAvatar(
+                        backgroundColor: Colors.grey[300]!.withOpacity(0.7),
                         child: Icon(model.inFavorites == true
                             ? Icons.favorite
                             : Icons.favorite_border),
-                        backgroundColor: Colors.grey[300]!.withOpacity(0.7),
                       ),
                     )
                   ],

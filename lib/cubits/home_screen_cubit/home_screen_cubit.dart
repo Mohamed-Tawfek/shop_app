@@ -23,27 +23,26 @@ class HomeCubit extends Cubit<HomeStates> {
         !productModel!.products[indexInProductModel].inCart;
 
     DioHelper.postData(
-        endPoint: addOrRemoveCartEndPoint,
-        data: {'product_id': productId},
-        token: token).then((value) {
+            endPoint: addOrRemoveCartEndPoint,
+            data: {'product_id': productId},
+            token: token)
+        .then((value) {
       if (productModel!.products[indexInProductModel].inCart) {
         buildAlertToast(
             message: 'Added to Cart!', alertToast: AlertToast.success);
       } else {
         buildAlertToast(
-            message: 'Removed from Cart!',
-            alertToast: AlertToast.success);
+            message: 'Removed from Cart!', alertToast: AlertToast.success);
       }
-    }).catchError((onError){
+    }).catchError((onError) {
       productModel!.products[indexInProductModel].inCart =
-      !productModel!.products[indexInProductModel].inCart;
-          emit(FailedChangeCartState());
+          !productModel!.products[indexInProductModel].inCart;
+      emit(FailedChangeCartState());
     });
   }
 
   addOrDeleteFavorite(
       {required num productId, required int indexInProductModel}) {
-    print('$productModel');
     productModel!.products[indexInProductModel].inFavorites =
         !productModel!.products[indexInProductModel].inFavorites;
     emit(ChangeIconFavoriteState());

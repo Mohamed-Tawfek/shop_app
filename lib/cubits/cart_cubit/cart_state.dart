@@ -11,4 +11,3 @@ class CartDataSuccessState extends CartState {}
 class DeleteFromCartErrorState extends CartState {}
 
 class DeleteFromCartSuccessState extends CartState {}
-

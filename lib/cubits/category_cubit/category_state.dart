@@ -16,7 +16,11 @@ class LoadingCategoryDetails extends CategoriesState {}
 class SuccessInGetCategoryDetails extends CategoriesState {}
 
 class ErrorInGetCategoryDetails extends CategoriesState {}
+
 class ChangeIconCartState extends CategoriesState {}
+
 class FailedChangeCartState extends CategoriesState {}
+
 class FailedChangeFavoriteState extends CategoriesState {}
+
 class ChangeIconFavoriteState extends CategoriesState {}

@@ -15,18 +15,18 @@ class ViewCategoryDetailsScreen extends StatelessWidget {
       create: (context) => CategoryCubit()..getCategoryDetails(id: id),
       child: BlocConsumer<CategoryCubit, CategoriesState>(
           builder: (context, state) => Scaffold(
-            appBar: AppBar(),
+              appBar: AppBar(),
               body: ConditionalBuilder(
                   condition: CategoryCubit.get(context).categoryDetails != null,
-                  builder: (context) => SingleChildScrollView(physics: const BouncingScrollPhysics(),
-                    child: buildViewProductsUi(
-                      forHomeScreen: false,
-                        model: CategoryCubit.get(context)
-                            .categoryDetails!
-                            .categoryDetails,
-
-                        context: context),
-                  ),
+                  builder: (context) => SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: buildViewProductsUi(
+                            forHomeScreen: false,
+                            model: CategoryCubit.get(context)
+                                .categoryDetails!
+                                .categoryDetails,
+                            context: context),
+                      ),
                   fallback: (context) => const Center(
                         child: CircularProgressIndicator(),
                       ))),

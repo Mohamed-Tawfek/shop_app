@@ -1,13 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:shop_app/models/category_model.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
-
 import '../../models/category_details_model.dart';
-import '../../models/products_model.dart';
 import '../../shared/component/component.dart';
 import '../../shared/network/end_points.dart';
 
@@ -23,24 +19,24 @@ class CategoryCubit extends Cubit<CategoriesState> {
   addOrDeleteFromCart(
       {required num productId, required int indexInProductModel}) {
     emit(ChangeIconCartState());
-    categoryDetails!.categoryDetails[indexInProductModel].inCart=
-    !categoryDetails!.categoryDetails[indexInProductModel].inCart;
+    categoryDetails!.categoryDetails[indexInProductModel].inCart =
+        !categoryDetails!.categoryDetails[indexInProductModel].inCart;
 
     DioHelper.postData(
-        endPoint: addOrRemoveCartEndPoint,
-        data: {'product_id': productId},
-        token: token).then((value) {
+            endPoint: addOrRemoveCartEndPoint,
+            data: {'product_id': productId},
+            token: token)
+        .then((value) {
       if (categoryDetails!.categoryDetails[indexInProductModel].inCart) {
         buildAlertToast(
             message: 'Added to Cart!', alertToast: AlertToast.success);
       } else {
         buildAlertToast(
-            message: 'Removed from Cart!',
-            alertToast: AlertToast.success);
+            message: 'Removed from Cart!', alertToast: AlertToast.success);
       }
-    }).catchError((onError){
+    }).catchError((onError) {
       categoryDetails!.categoryDetails[indexInProductModel].inCart =
-      !categoryDetails!.categoryDetails[indexInProductModel].inCart;
+          !categoryDetails!.categoryDetails[indexInProductModel].inCart;
       emit(FailedChangeCartState());
     });
   }
@@ -48,12 +44,12 @@ class CategoryCubit extends Cubit<CategoriesState> {
   addOrDeleteFavorite(
       {required num productId, required int indexInProductModel}) {
     categoryDetails!.categoryDetails[indexInProductModel].inFavorites =
-    !categoryDetails!.categoryDetails[indexInProductModel].inFavorites;
+        !categoryDetails!.categoryDetails[indexInProductModel].inFavorites;
     emit(ChangeIconFavoriteState());
     DioHelper.postData(
-        endPoint: addOrRemoveFavoritesEndPoint,
-        data: {'product_id': productId},
-        token: token)
+            endPoint: addOrRemoveFavoritesEndPoint,
+            data: {'product_id': productId},
+            token: token)
         .then((value) {
       if (categoryDetails!.categoryDetails[indexInProductModel].inFavorites) {
         buildAlertToast(
@@ -65,7 +61,7 @@ class CategoryCubit extends Cubit<CategoriesState> {
       }
     }).catchError((onError) {
       categoryDetails!.categoryDetails[indexInProductModel].inFavorites =
-      !categoryDetails!.categoryDetails[indexInProductModel].inFavorites;
+          !categoryDetails!.categoryDetails[indexInProductModel].inFavorites;
       emit(FailedChangeFavoriteState());
       if (categoryDetails!.categoryDetails[indexInProductModel].inFavorites) {
         buildAlertToast(
@@ -78,6 +74,7 @@ class CategoryCubit extends Cubit<CategoriesState> {
       }
     });
   }
+
   void getCategoriesData() {
     emit(LoadingCategoriesData());
     DioHelper.getData(endPoint: categoriesEndPoint).then((value) {
@@ -92,9 +89,8 @@ class CategoryCubit extends Cubit<CategoriesState> {
   void getCategoryDetails({required id}) {
     categoryDetails = null;
     emit(LoadingCategoryDetails());
-    DioHelper.getData(endPoint: '$categoriesEndPoint/$id',
-    token: token
-    ).then((value) {
+    DioHelper.getData(endPoint: '$categoriesEndPoint/$id', token: token)
+        .then((value) {
       categoryDetails = CategoryDetailsModel.fromJson(value.data);
       emit(SuccessInGetCategoryDetails());
     }).catchError((onError) {

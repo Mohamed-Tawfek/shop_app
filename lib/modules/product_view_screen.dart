@@ -1,11 +1,8 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/cubits/home_screen_cubit/home_screen_state.dart';
+
 import 'package:shop_app/models/products_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../cubits/home_screen_cubit/home_screen_cubit.dart';
 import '../shared/component/component.dart';
 import '../shared/styles/colors.dart';
 
@@ -13,13 +10,11 @@ class ProductViewScreen extends StatelessWidget {
   ProductViewScreen({
     Key? key,
     required this.model,
-
   }) : super(key: key);
   ProductModel? model;
   PageController pageController = PageController();
   bool isLast = false;
   bool isFirst = true;
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +48,9 @@ class ProductViewScreen extends StatelessWidget {
                       },
                       children: model!.otherImages
                           .map((e) => Image.network(
-                        e,
-                        fit: BoxFit.contain,
-                      ))
+                                e,
+                                fit: BoxFit.contain,
+                              ))
                           .toList(),
                     ),
                     Row(
@@ -63,94 +58,91 @@ class ProductViewScreen extends StatelessWidget {
                         IconButton(
                           onPressed: () {
                             if (isFirst) {
-                              pageController.jumpToPage(
-                                  model!.otherImages.length - 1);
+                              pageController
+                                  .jumpToPage(model!.otherImages.length - 1);
                             } else {
                               pageController.previousPage(
-                                  duration: Duration(milliseconds: 750),
+                                  duration: const Duration(milliseconds: 750),
                                   curve: Curves.fastLinearToSlowEaseIn);
                             }
                           },
-                          icon: Icon(Icons.arrow_back_ios_outlined),
+                          icon: const Icon(Icons.arrow_back_ios_outlined),
                         ),
                         const Spacer(),
                         IconButton(
                           onPressed: () {
                             pageController.nextPage(
-                                duration: Duration(milliseconds: 750),
+                                duration: const Duration(milliseconds: 750),
                                 curve: Curves.fastLinearToSlowEaseIn);
                             if (isLast) {
                               pageController.jumpToPage(0);
                             }
                           },
-                          icon: Icon(Icons.arrow_forward_ios),
+                          icon: const Icon(Icons.arrow_forward_ios),
                         ),
                       ],
                     )
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Center(
                 child: SmoothPageIndicator(
-                  controller: pageController,
-                  count: model!.otherImages.length,
-                  effect: ExpandingDotsEffect(
-                      activeDotColor: primarySwatchColor,
-                      dotColor: Colors.grey),
-                )),
-            SizedBox(
+              controller: pageController,
+              count: model!.otherImages.length,
+              effect: const ExpandingDotsEffect(
+                  activeDotColor: primarySwatchColor, dotColor: Colors.grey),
+            )),
+            const SizedBox(
               height: 20.0,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Name : ",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 35),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
                 ),
                 Expanded(
                   child: Text(
                     model!.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 25.0, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Price :",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 35),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Text(
                   "${model!.price} EGP ",
                   textAlign: TextAlign.start,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: primarySwatchColor,
                       fontSize: 30),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 if (model!.discount > 0)
                   Expanded(
                     child: Text(
                       "${model!.oldPrice} EGP",
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.grey,
                           decoration: TextDecoration.lineThrough,
@@ -159,20 +151,19 @@ class ProductViewScreen extends StatelessWidget {
                   ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               'Description : ',
-              style: TextStyle(
-                  fontSize: 30.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
             ),
             Text(
               model!.description.toString(),
-              style: TextStyle(
-                  fontSize: 25.0, fontWeight: FontWeight.bold),
+              style:
+                  const TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
             defaultMaterialButton(
@@ -181,7 +172,7 @@ class ProductViewScreen extends StatelessWidget {
               text: 'Add to cart',
               color: Colors.amber,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10.0,
             ),
             defaultMaterialButton(
@@ -193,7 +184,6 @@ class ProductViewScreen extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }

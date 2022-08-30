@@ -15,14 +15,14 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
       DioHelper.init();
       await CashHelper.init();
-      runApp(MyApp());
+      runApp(const MyApp());
     },
     blocObserver: MyBlocObserver(),
   );
 }
 
 class MyApp extends StatelessWidget {
- const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +52,9 @@ Widget getInitialScreen() {
   String? token = CashHelper.getData(key: 'token');
   if (onBoardingStatus == null) {
     return OnBoardingScreen();
-  } else if (onBoardingStatus != null && token == null) {
-    return LoginScreen();
+  } else if (token == null) {
+    return const LoginScreen();
   } else {
-    print(token);
-    return ShopLayout();
+    return const ShopLayout();
   }
 }

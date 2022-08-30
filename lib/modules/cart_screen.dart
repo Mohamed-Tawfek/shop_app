@@ -53,16 +53,16 @@ class CartScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     "Total : ${CartCubit.get(context).cartDetails!.total} EG",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 35.0,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   IconButton(
                                     onPressed: () {
                                       CartCubit.get(context).deleteCart();
                                     },
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.delete,
                                       size: 30.0,
                                       color: Colors.red,
@@ -73,14 +73,14 @@ class CartScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                    fallback: (context) => Center(
+                    fallback: (context) => const Center(
                           child: Text(
                             'Your cart is empty',
                             style: TextStyle(
                                 fontSize: 35.0, fontWeight: FontWeight.bold),
                           ),
                         )),
-                fallback: (context) => Center(
+                fallback: (context) => const Center(
                       child: CircularProgressIndicator(),
                     )),
           );
@@ -95,7 +95,6 @@ class CartScreen extends StatelessWidget {
           navigateTo(
               screen: ProductViewScreen(
                 model: model!.product,
-
               ),
               context: context);
         },
@@ -108,7 +107,7 @@ class CartScreen extends StatelessWidget {
                 width: 120,
                 height: 120,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5.0,
               ),
               Expanded(
@@ -119,19 +118,19 @@ class CartScreen extends StatelessWidget {
                     Text(
                       model.product!.name,
                       maxLines: 2,
-                      style:
-                          TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 30.0, fontWeight: FontWeight.bold),
                     ),
                     Row(
                       children: [
                         Text(
                           model.product!.price.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
                               color: primarySwatchColor),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         if (model.product!.discount > 0)
@@ -148,7 +147,7 @@ class CartScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 2.0,
               ),
               IconButton(
@@ -157,7 +156,7 @@ class CartScreen extends StatelessWidget {
                     productId: model.product!.id,
                   );
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.delete,
                   size: 30.0,
                   color: Colors.red,

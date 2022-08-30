@@ -4,14 +4,14 @@ class BannerModel {
     image = json['image'];
   }
 }
-class BannerDataModel{
+
+class BannerDataModel {
   bool? status;
   late List<BannerModel> banners = [];
-  BannerDataModel.fromJson(Map<String, dynamic> json){
-status=json['status'];
-json['data'].forEach((e) {
-  banners.add(BannerModel.fromJson(e));
-});
+  BannerDataModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    json['data'].forEach((e) {
+      banners.add(BannerModel.fromJson(e));
+    });
   }
-
 }
