@@ -12,35 +12,33 @@ class ProfileScreen extends StatelessWidget {
   final TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (_) => ProfileCubit()..getProfileData(),
-        child:
-            BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
-          if (ProfileCubit.get(context).profileModel != null) {
-            nameController.text = ProfileCubit.get(context).profileModel!.name;
+    return BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
 
-            emailController.text =
-                ProfileCubit.get(context).profileModel!.email;
-            phoneController.text =
-                ProfileCubit.get(context).profileModel!.phone;
+          if (ProfileCubit.get(context).profileModel != null) {
+    nameController.text = ProfileCubit.get(context).profileModel!.name;
+
+    emailController.text =
+        ProfileCubit.get(context).profileModel!.email;
+    phoneController.text =
+        ProfileCubit.get(context).profileModel!.phone;
           }
           return Scaffold(
-              appBar: AppBar(
-                title: const Text('Profile'),
+      appBar: AppBar(
+        title: const Text('Profile'),
+      ),
+      body: ConditionalBuilder(
+          condition: ProfileCubit.get(context).profileModel != null,
+          builder: (context) => Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: BuildProfileUi(
+                    nameController: nameController,
+                    emailController: emailController,
+                    phoneController: phoneController),
               ),
-              body: ConditionalBuilder(
-                  condition: ProfileCubit.get(context).profileModel != null,
-                  builder: (context) => Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: BuildProfileUi(
-                            nameController: nameController,
-                            emailController: emailController,
-                            phoneController: phoneController),
-                      ),
-                  fallback: (context) => const Center(
-                        child: CircularProgressIndicator(),
-                      )));
-        }));
+          fallback: (context) => const Center(
+                child: CircularProgressIndicator(),
+              )));
+        });
   }
 }
 

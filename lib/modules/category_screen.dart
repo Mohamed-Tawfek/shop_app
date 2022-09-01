@@ -11,37 +11,36 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CategoryCubit()..getCategoriesData(),
-      child: BlocConsumer<CategoryCubit, CategoriesState>(
-          builder: (context, state) {
-            return Scaffold(
-              body: ConditionalBuilder(
-                  condition: CategoryCubit.get(context).categoryModel != null,
-                  builder: (context) => ListView.separated(
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) => buildCategoryItem(
-                            context: context,
-                            model: CategoryCubit.get(context)
-                                .categoryModel!
-                                .data[index]),
-                        separatorBuilder: (context, index) =>
-                            buildSeparatorBuilderForCategoryItem(),
-                        itemCount: CategoryCubit.get(context)
-                            .categoryModel!
-                            .data
-                            .length,
+    return BlocConsumer<CategoryCubit, CategoriesState>(
+        builder: (context, state) {
+          return Scaffold(
+            body: ConditionalBuilder(
+                condition: CategoryCubit.get(context).categoryModel != null,
+                builder: (context) => ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) => buildCategoryItem(
+
+                          context: context,
+                          model: CategoryCubit.get(context).categoryModel!.data[index]
+
                       ),
-                  fallback: (context) => const Center(
-                        child: CircularProgressIndicator(),
-                      )),
-            );
-          },
-          listener: (context, state) {}),
-    );
+                      separatorBuilder: (context, index) =>
+                          buildSeparatorBuilderForCategoryItem(),
+                      itemCount: CategoryCubit.get(context)
+                          .categoryModel!
+                          .data
+                          .length,
+                    ),
+                fallback: (context) => const Center(
+                      child: CircularProgressIndicator(),
+                    )),
+          );
+        },
+        listener: (context, state) {});
   }
 
   Widget buildCategoryItem({required CategoryDataModel model, context}) =>
+
       Padding(
         padding: const EdgeInsets.only(
           right: 15,
@@ -50,8 +49,9 @@ class CategoryScreen extends StatelessWidget {
         child: InkWell(
           onTap: () {
             navigateTo(
-                screen: ViewCategoryDetailsScreen(id: model.id),
+                screen: ViewCategoryDetailsScreen(id: model!.id),
                 context: context);
+            CategoryCubit.get(context).getCategoryDetails(id: model.id);
           },
           child: Container(
             color: Colors.grey[100],

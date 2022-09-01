@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/cubits/cart_cubit/cart_cubit.dart';
+import 'package:shop_app/cubits/category_cubit/category_cubit.dart';
+import 'package:shop_app/cubits/home_screen_cubit/home_screen_cubit.dart';
 
 import 'package:shop_app/models/products_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../cubits/product_details_cubit/product_details_cubit.dart';
 import '../shared/component/component.dart';
 import '../shared/styles/colors.dart';
 
@@ -10,16 +15,35 @@ class ProductViewScreen extends StatelessWidget {
   ProductViewScreen({
     Key? key,
     required this.model,
+    required this.index,
+    required this.idOfCategory,
+    this.forSearch=false
   }) : super(key: key);
-  ProductModel? model;
+  ProductModel?  model;
+  int index;
   PageController pageController = PageController();
   bool isLast = false;
   bool isFirst = true;
-
+  var idOfCategory;
+  bool forSearch;
   @override
   Widget build(BuildContext context) {
+    ProductDetailsCubit.inCart=model!.inCart;
+
+    return BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+  builder: (context, state) {
+
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back_outlined),
+        onPressed: () {
+          Navigator.pop(context);
+
+
+        },
+
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: ListView(
@@ -138,7 +162,7 @@ class ProductViewScreen extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                if (model!.discount > 0)
+                if (model!.discount!=null&&model!.discount>0)
                   Expanded(
                     child: Text(
                       "${model!.oldPrice} EGP",
@@ -166,24 +190,33 @@ class ProductViewScreen extends StatelessWidget {
             const SizedBox(
               height: 10.0,
             ),
-            defaultMaterialButton(
-              context,
-              onPressedButton: () {},
-              text: 'Add to cart',
-              color: Colors.amber,
-            ),
+        state is AddOrRemoveProductFromCartLoading?
+            const Center(child: CircularProgressIndicator(),):
+
+
+        defaultMaterialButton(
+          context,
+          onPressedButton: ()  {
+               ProductDetailsCubit.get(context).addOrRemoveFromCart(
+              context: context, productId: model!.id,
+                 categoryId: idOfCategory,
+                 useInSearch: forSearch
+            );
+
+
+          },
+          text:  ProductDetailsCubit.inCart ?'Removed from cart':'Add to cart',
+          color: Colors.amber,
+        ),
             const SizedBox(
               height: 10.0,
             ),
-            defaultMaterialButton(
-              context,
-              onPressedButton: () {},
-              text: 'Buy Now',
-              color: Colors.orange,
-            ),
+
           ],
         ),
       ),
     );
+  },
+);
   }
 }
