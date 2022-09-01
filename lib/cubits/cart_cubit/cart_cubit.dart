@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:shop_app/shared/component/component.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
@@ -35,6 +36,7 @@ class CartCubit extends Cubit<CartState> {
         buildAlertToast(
             message: 'Deleted successfully', alertToast: AlertToast.error);
         emit(DeleteFromCartSuccessState());
+
       });
     }).catchError((onError) {
       emit(DeleteFromCartErrorState());
@@ -45,7 +47,7 @@ class CartCubit extends Cubit<CartState> {
     // I had to loop on all items ,
     // because delete cart endpoint does not work!
     cartDetails!.items.forEach((element) async {
-      await deleteFromCart(productId: element.product!.id);
+      await deleteFromCart(productId: element.product!.id,);
     });
   }
 }

@@ -16,13 +16,13 @@ class HomeCubit extends Cubit<HomeStates> {
   ProductsModel? productModel;
   BannerDataModel? bannerDataModel;
   String token = CashHelper.getData(key: 'token');
-  addOrDeleteFromCart(
-      {required num productId, required int indexInProductModel}) {
+Future<void>  addOrDeleteFromCart(
+      {required num productId, required int indexInProductModel})async {
     emit(ChangeIconCartState());
     productModel!.products[indexInProductModel].inCart =
         !productModel!.products[indexInProductModel].inCart;
 
-    DioHelper.postData(
+  await  DioHelper.postData(
             endPoint: addOrRemoveCartEndPoint,
             data: {'product_id': productId},
             token: token)
@@ -94,6 +94,7 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
   Future<void> getProductsData() async {
+    productModel=null;
     emit(GetProductsDataLoadingState());
     await DioHelper.getData(endPoint: homeEndPoint, token: token).then((value) {
       productModel = ProductsModel.fromJson(value.data);

@@ -2,9 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shop_app/cubits/cart_cubit/cart_cubit.dart';
 import 'package:shop_app/modules/product_view_screen.dart';
 import '../../cubits/category_cubit/category_cubit.dart';
 import '../../cubits/home_screen_cubit/home_screen_cubit.dart';
+import '../../cubits/search_cubit/search_cubit.dart';
 import '../../models/products_model.dart';
 import '../styles/colors.dart';
 
@@ -97,7 +99,10 @@ Future<bool?> buildAlertToast(
 Widget buildViewProductsUi(
     {required List<ProductModel> model,
     required context,
-    bool forHomeScreen = true}) {
+      required idOfCategory,
+    bool forHomeScreen = false,
+      bool forSearchScreen=false
+    }) {
   return Container(
     color: Colors.grey[300],
     child: GridView.count(
@@ -111,18 +116,24 @@ Widget buildViewProductsUi(
       children: List.generate(
           model.length,
           (index) => buildProductItemUi(model[index], context, index,
-              forHomeScreen: forHomeScreen)),
+              idOfCategory:idOfCategory,
+              forHomeScreen: forHomeScreen,
+          forSearchScreen:  forSearchScreen
+          )),
     ),
   );
 }
 
 Widget buildProductItemUi(ProductModel model, context, index,
-    {required bool forHomeScreen}) {
+    { required bool forHomeScreen ,  required idOfCategory, required bool forSearchScreen,}) {
   return InkWell(
     onTap: () {
       navigateTo(
           screen: ProductViewScreen(
             model: model,
+            index: index,
+            idOfCategory: idOfCategory,
+            forSearch:forSearchScreen ,
           ),
           context: context);
     },
@@ -200,10 +211,18 @@ Widget buildProductItemUi(ProductModel model, context, index,
                         if (forHomeScreen) {
                           HomeCubit.get(context).addOrDeleteFromCart(
                               productId: model.id, indexInProductModel: index);
-                        } else {
+                        }
+                        else if(forSearchScreen){
+                          SearchCubit.get(context).addOrDeleteFromCart(
+                            context: context,
+                              productId: model.id, indexInProductModel: index);
+                        }
+
+                        else {
                           CategoryCubit.get(context).addOrDeleteFromCart(
                               productId: model.id, indexInProductModel: index);
                         }
+                        CartCubit.get(context).getCartData();
                       },
                       icon: CircleAvatar(
                         backgroundColor: Colors.grey[300]!.withOpacity(0.7),
@@ -220,7 +239,13 @@ Widget buildProductItemUi(ProductModel model, context, index,
                         if (forHomeScreen) {
                           HomeCubit.get(context).addOrDeleteFavorite(
                               productId: model.id, indexInProductModel: index);
-                        } else {
+                        }
+                        else if(forSearchScreen){
+                          SearchCubit.get(context).addOrDeleteFavorite(
+                              context: context,
+                              productId: model.id, indexInProductModel: index);
+                        }
+                        else {
                           CategoryCubit.get(context).addOrDeleteFavorite(
                               productId: model.id, indexInProductModel: index);
                         }

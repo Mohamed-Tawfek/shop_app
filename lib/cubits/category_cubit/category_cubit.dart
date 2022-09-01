@@ -76,6 +76,7 @@ class CategoryCubit extends Cubit<CategoriesState> {
   }
 
   void getCategoriesData() {
+
     emit(LoadingCategoriesData());
     DioHelper.getData(endPoint: categoriesEndPoint).then((value) {
       categoryModel = CategoryModel.fromJson(value.data);
@@ -86,7 +87,7 @@ class CategoryCubit extends Cubit<CategoriesState> {
     });
   }
 
-  void getCategoryDetails({required id}) {
+  Future<void> getCategoryDetails({required id})async {
     categoryDetails = null;
     emit(LoadingCategoryDetails());
     DioHelper.getData(endPoint: '$categoriesEndPoint/$id', token: token)

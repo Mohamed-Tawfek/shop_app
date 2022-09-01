@@ -6,31 +6,37 @@ import 'package:shop_app/cubits/category_cubit/category_cubit.dart';
 import '../shared/component/component.dart';
 
 class ViewCategoryDetailsScreen extends StatelessWidget {
-  var id;
-  ViewCategoryDetailsScreen({Key? key, required this.id}) : super(key: key);
-
+   ViewCategoryDetailsScreen({Key? key,required this.id }) : super(key: key);
+int? id;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CategoryCubit()..getCategoryDetails(id: id),
-      child: BlocConsumer<CategoryCubit, CategoriesState>(
-          builder: (context, state) => Scaffold(
-              appBar: AppBar(),
-              body: ConditionalBuilder(
-                  condition: CategoryCubit.get(context).categoryDetails != null,
-                  builder: (context) => SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: buildViewProductsUi(
-                            forHomeScreen: false,
-                            model: CategoryCubit.get(context)
-                                .categoryDetails!
-                                .categoryDetails,
-                            context: context),
-                      ),
-                  fallback: (context) => const Center(
-                        child: CircularProgressIndicator(),
-                      ))),
-          listener: (context, state) {}),
-    );
+
+    return BlocConsumer<CategoryCubit, CategoriesState>(
+        builder: (context, state) {
+
+
+
+          return Scaffold(
+            appBar: AppBar(),
+            body: ConditionalBuilder(
+                condition: CategoryCubit.get(context).categoryDetails != null,
+                builder: (context) => SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: buildViewProductsUi(
+                          forHomeScreen: false,
+                          model: CategoryCubit.get(context)
+                              .categoryDetails!
+                              .categoryDetails,
+                          idOfCategory: id,
+                          context: context),
+                    ),
+                fallback: (context) {
+                   return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+
+                }));
+        },
+        listener: (context, state) {});
   }
 }
