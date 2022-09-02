@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
@@ -22,7 +21,7 @@ Widget defaultTextField(
         Widget? suffixIcon,
         TextInputType? keyboardType}) =>
     TextFormField(
-      style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w500),
+      style: const TextStyle(fontSize: 25.0, fontWeight: FontWeight.w500),
       controller: controller,
       onChanged: onChanged,
       enabled: enabled,
@@ -50,7 +49,7 @@ Widget defaultMaterialButton(context,
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Text(
             text.toUpperCase(),
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
@@ -62,7 +61,7 @@ Widget defaultTextButton(
         onPressed: onPressedText,
         child: Text(
           text,
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
         ));
 
 navigateTo({required Widget screen, required context}) => Navigator.push(
@@ -176,7 +175,7 @@ Widget buildProductItemUi(ProductModel model, context, index,
                   model.name,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 5,

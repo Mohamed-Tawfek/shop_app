@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/cubits/cart_cubit/cart_cubit.dart';
-import 'package:shop_app/cubits/category_cubit/category_cubit.dart';
-import 'package:shop_app/cubits/home_screen_cubit/home_screen_cubit.dart';
 
 import 'package:shop_app/models/products_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -12,7 +9,7 @@ import '../shared/component/component.dart';
 import '../shared/styles/colors.dart';
 
 class ProductViewScreen extends StatelessWidget {
-  ProductViewScreen({
+    ProductViewScreen({
     Key? key,
     required this.model,
     required this.index,
@@ -24,7 +21,7 @@ class ProductViewScreen extends StatelessWidget {
   PageController pageController = PageController();
   bool isLast = false;
   bool isFirst = true;
-  var idOfCategory;
+  dynamic idOfCategory;
   bool forSearch;
   @override
   Widget build(BuildContext context) {
@@ -35,7 +32,7 @@ class ProductViewScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(icon: Icon(Icons.arrow_back_outlined),
+        leading: IconButton(icon:const Icon(Icons.arrow_back_outlined),
         onPressed: () {
           Navigator.pop(context);
 

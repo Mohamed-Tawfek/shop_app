@@ -49,7 +49,7 @@ class CategoryScreen extends StatelessWidget {
         child: InkWell(
           onTap: () {
             navigateTo(
-                screen: ViewCategoryDetailsScreen(id: model!.id),
+                screen: ViewCategoryDetailsScreen(id: model.id),
                 context: context);
             CategoryCubit.get(context).getCategoryDetails(id: model.id);
           },

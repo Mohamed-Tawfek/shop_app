@@ -13,8 +13,8 @@ class ProductModel {
     inCart = json['in_cart'];
   }
   late num id;
-  late var discount;
-  late var oldPrice;
+  late dynamic discount;
+  late dynamic oldPrice;
   late num price;
   late String mainImage;
   late String name;
