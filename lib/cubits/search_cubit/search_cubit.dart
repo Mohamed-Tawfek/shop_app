@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubits/cart_cubit/cart_cubit.dart';
-import 'package:shop_app/cubits/category_cubit/category_cubit.dart';
-import 'package:shop_app/cubits/home_screen_cubit/home_screen_cubit.dart';
+ import 'package:shop_app/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:shop_app/cubits/search_cubit/search_state.dart';
 import 'package:shop_app/shared/network/end_points.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';

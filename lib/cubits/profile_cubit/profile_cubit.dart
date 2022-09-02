@@ -60,7 +60,7 @@ class ProfileCubit extends Cubit<ProfileState> {
               ? AlertToast.success
               : AlertToast.error);
       await CashHelper.remove(key: 'token');
-      navigateToAndFinish(screen: LoginScreen(), context: context);
+      navigateToAndFinish(screen:const LoginScreen(), context: context);
     });
   }
 }

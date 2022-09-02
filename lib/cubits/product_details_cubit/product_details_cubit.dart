@@ -1,6 +1,4 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:shop_app/cubits/category_cubit/category_cubit.dart';
 import 'package:shop_app/cubits/home_screen_cubit/home_screen_cubit.dart';
 import 'package:shop_app/cubits/search_cubit/search_cubit.dart';

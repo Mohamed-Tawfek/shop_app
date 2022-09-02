@@ -32,7 +32,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       userModel = UserModel.fromJson(value.data);
       if (userModel!.status == true) {
         await CashHelper.setData(key: 'token', value: userModel!.token);
-        navigateToAndFinish(screen: ShopLayout(), context: context);
+        navigateToAndFinish(screen:const ShopLayout(), context: context);
         buildAlertToast(
             message: userModel!.message, alertToast: AlertToast.success);
       } else {

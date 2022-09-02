@@ -26,7 +26,7 @@ class LoginCubit extends Cubit<LoginStates> {
       if (loginModel!.status) {
         CashHelper.setData(key: 'token', value: loginModel!.token)
             .then((value) {
-          navigateToAndFinish(screen: ShopLayout(), context: context);
+          navigateToAndFinish(screen: const ShopLayout(), context: context);
           buildAlertToast(
               alertToast: AlertToast.success, message: loginModel!.message);
         });

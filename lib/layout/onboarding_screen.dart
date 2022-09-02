@@ -7,8 +7,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../shared/styles/colors.dart';
 
 class OnBoardingScreen extends StatelessWidget {
-  OnBoardingScreen({Key? key}) : super(key: key);
-  List<OnBoardingModel> onBoardingItems = [
+    OnBoardingScreen({Key? key}) : super(key: key);
+      List<OnBoardingModel> onBoardingItems = [
     OnBoardingModel(
         pathOfImage: 'assets/images/onboarding_images/1.jpg',
         screenBody: 'Screen Body 1',
@@ -120,7 +120,7 @@ class OnBoardingScreen extends StatelessWidget {
       Navigator.pushAndRemoveUntil(
         context,
         PageTransition(
-            type: PageTransitionType.leftToRight, child: LoginScreen()),
+            type: PageTransitionType.leftToRight, child: const LoginScreen()),
         (route) => false,
       );
     });
