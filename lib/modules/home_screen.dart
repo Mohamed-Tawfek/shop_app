@@ -11,18 +11,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocConsumer<HomeCubit, HomeStates>(
         builder: (context, state) {
-
           return ConditionalBuilder(
               condition: HomeCubit.get(context).productModel != null &&
                   HomeCubit.get(context).bannerDataModel != null,
               builder: (context) => RefreshIndicator(
                     onRefresh: () {
-                      return HomeCubit.get(context)
-                          .getHomeData()
-                          .then((value) {
+                      return HomeCubit.get(context).getHomeData().then((value) {
                         buildAlertToast(
                             alertToast: AlertToast.success,
                             message: 'Updated successfully');
@@ -39,20 +35,25 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             SizedBox(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.3,
+                              height: MediaQuery.of(context).size.height * 0.3,
+                              width: MediaQuery.of(context).size.width,
                               child: CarouselSlider(
                                   items: List.generate(
                                       HomeCubit.get(context)
                                           .bannerDataModel!
                                           .banners
                                           .length,
-                                      (index) => Image.network(
-                                            HomeCubit.get(context)
-                                                .bannerDataModel!
-                                                .banners[index]
-                                                .image,
-                                            fit: BoxFit.cover,
+                                      (index) => Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Image.network(
+                                              HomeCubit.get(context)
+                                                  .bannerDataModel!
+                                                  .banners[index]
+                                                  .image,
+                                              fit: BoxFit.fill,
+                                            ),
                                           )),
                                   options: CarouselOptions(
                                     autoPlay: true,
@@ -67,10 +68,8 @@ class HomeScreen extends StatelessWidget {
                                     .productModel!
                                     .products,
                                 context: context,
-                            forHomeScreen: true,
-                            idOfCategory: null
-
-                            )
+                                forHomeScreen: true,
+                                idOfCategory: null)
                           ],
                         ),
                       ),

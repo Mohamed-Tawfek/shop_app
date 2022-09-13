@@ -98,10 +98,9 @@ Future<bool?> buildAlertToast(
 Widget buildViewProductsUi(
     {required List<ProductModel> model,
     required context,
-      required idOfCategory,
+    required idOfCategory,
     bool forHomeScreen = false,
-      bool forSearchScreen=false
-    }) {
+    bool forSearchScreen = false}) {
   return Container(
     color: Colors.grey[300],
     child: GridView.count(
@@ -110,21 +109,74 @@ Widget buildViewProductsUi(
       physics: const NeverScrollableScrollPhysics(),
       crossAxisSpacing: 3,
       // top is opposite in childAspectRatio
-      childAspectRatio: 0.982 / 1.7,
+      childAspectRatio: dimensionsOfGridView(context),
       mainAxisSpacing: 3,
       children: List.generate(
           model.length,
           (index) => buildProductItemUi(model[index], context, index,
-              idOfCategory:idOfCategory,
+              idOfCategory: idOfCategory,
               forHomeScreen: forHomeScreen,
-          forSearchScreen:  forSearchScreen
-          )),
+              forSearchScreen: forSearchScreen)),
     ),
   );
 }
 
-Widget buildProductItemUi(ProductModel model, context, index,
-    { required bool forHomeScreen ,  required idOfCategory, required bool forSearchScreen,}) {
+double dimensionsOfGridView(context) {
+  if (MediaQuery.of(context).size.width >= 477 &&
+      MediaQuery.of(context).size.width < 559) {
+    return 1.2 / 1.7;
+  }
+  if (MediaQuery.of(context).size.width >= 559 &&
+      MediaQuery.of(context).size.width < 677) {
+    return 1.4 / 1.7;
+  }
+  if (MediaQuery.of(context).size.width >= 677 &&
+      MediaQuery.of(context).size.width < 832) {
+    return 1.7 / 1.7;
+  }
+  if (MediaQuery.of(context).size.width >= 832 &&
+      MediaQuery.of(context).size.width < 962) {
+    return 2.1 / 1.7;
+  }
+  if (MediaQuery.of(context).size.width >= 962 &&
+      MediaQuery.of(context).size.width < 999) {
+    return 2.5 / 1.7;
+  }
+  if (MediaQuery.of(context).size.width >= 999 &&
+      MediaQuery.of(context).size.width < 1085) {
+    return 2.6 / 1.7;
+  }
+  if (MediaQuery.of(context).size.width >= 1085 &&
+      MediaQuery.of(context).size.width < 1146) {
+    return 2.8 / 1.7;
+  }
+  if (MediaQuery.of(context).size.width >= 1146 &&
+      MediaQuery.of(context).size.width < 1313) {
+    return 3 / 1.7;
+  }
+  if (MediaQuery.of(context).size.width >= 1313 &&
+      MediaQuery.of(context).size.width < 1385) {
+    return 3.3 / 1.7;
+  }
+  if (MediaQuery.of(context).size.width >= 1385 &&
+      MediaQuery.of(context).size.width < 1535) {
+    return 3.6 / 1.7;
+  }
+  if (MediaQuery.of(context).size.width >= 1535) {
+    return 4 / 1.7;
+  }
+
+  return 0.982 / 1.7;
+}
+
+Widget buildProductItemUi(
+  ProductModel model,
+  context,
+  index, {
+  required bool forHomeScreen,
+  required idOfCategory,
+  required bool forSearchScreen,
+}) {
   return InkWell(
     onTap: () {
       navigateTo(
@@ -132,7 +184,7 @@ Widget buildProductItemUi(ProductModel model, context, index,
             model: model,
             index: index,
             idOfCategory: idOfCategory,
-            forSearch:forSearchScreen ,
+            forSearch: forSearchScreen,
           ),
           context: context);
     },
@@ -148,6 +200,7 @@ Widget buildProductItemUi(ProductModel model, context, index,
               Image.network(
                 model.mainImage,
                 height: 200.0,
+                width: double.infinity * 0.3,
               ),
               if (model.discount != 0)
                 Container(
@@ -210,14 +263,12 @@ Widget buildProductItemUi(ProductModel model, context, index,
                         if (forHomeScreen) {
                           HomeCubit.get(context).addOrDeleteFromCart(
                               productId: model.id, indexInProductModel: index);
-                        }
-                        else if(forSearchScreen){
+                        } else if (forSearchScreen) {
                           SearchCubit.get(context).addOrDeleteFromCart(
-                            context: context,
-                              productId: model.id, indexInProductModel: index);
-                        }
-
-                        else {
+                              context: context,
+                              productId: model.id,
+                              indexInProductModel: index);
+                        } else {
                           CategoryCubit.get(context).addOrDeleteFromCart(
                               productId: model.id, indexInProductModel: index);
                         }
@@ -238,13 +289,12 @@ Widget buildProductItemUi(ProductModel model, context, index,
                         if (forHomeScreen) {
                           HomeCubit.get(context).addOrDeleteFavorite(
                               productId: model.id, indexInProductModel: index);
-                        }
-                        else if(forSearchScreen){
+                        } else if (forSearchScreen) {
                           SearchCubit.get(context).addOrDeleteFavorite(
                               context: context,
-                              productId: model.id, indexInProductModel: index);
-                        }
-                        else {
+                              productId: model.id,
+                              indexInProductModel: index);
+                        } else {
                           CategoryCubit.get(context).addOrDeleteFavorite(
                               productId: model.id, indexInProductModel: index);
                         }
