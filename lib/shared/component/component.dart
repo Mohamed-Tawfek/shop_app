@@ -101,6 +101,7 @@ Widget buildViewProductsUi(
     required idOfCategory,
     bool forHomeScreen = false,
     bool forSearchScreen = false}) {
+  double aspectRatio=MediaQuery.of(context).size.aspectRatio;
   return Container(
     color: Colors.grey[300],
     child: GridView.count(
@@ -109,7 +110,7 @@ Widget buildViewProductsUi(
       physics: const NeverScrollableScrollPhysics(),
       crossAxisSpacing: 3,
       // top is opposite in childAspectRatio
-      childAspectRatio: dimensionsOfGridView(context),
+      childAspectRatio: aspectRatio,
       mainAxisSpacing: 3,
       children: List.generate(
           model.length,
@@ -121,53 +122,53 @@ Widget buildViewProductsUi(
   );
 }
 
-double dimensionsOfGridView(context) {
-  if (MediaQuery.of(context).size.width >= 477 &&
-      MediaQuery.of(context).size.width < 559) {
-    return 1.2 / 1.7;
-  }
-  if (MediaQuery.of(context).size.width >= 559 &&
-      MediaQuery.of(context).size.width < 677) {
-    return 1.4 / 1.7;
-  }
-  if (MediaQuery.of(context).size.width >= 677 &&
-      MediaQuery.of(context).size.width < 832) {
-    return 1.7 / 1.7;
-  }
-  if (MediaQuery.of(context).size.width >= 832 &&
-      MediaQuery.of(context).size.width < 962) {
-    return 2.1 / 1.7;
-  }
-  if (MediaQuery.of(context).size.width >= 962 &&
-      MediaQuery.of(context).size.width < 999) {
-    return 2.5 / 1.7;
-  }
-  if (MediaQuery.of(context).size.width >= 999 &&
-      MediaQuery.of(context).size.width < 1085) {
-    return 2.6 / 1.7;
-  }
-  if (MediaQuery.of(context).size.width >= 1085 &&
-      MediaQuery.of(context).size.width < 1146) {
-    return 2.8 / 1.7;
-  }
-  if (MediaQuery.of(context).size.width >= 1146 &&
-      MediaQuery.of(context).size.width < 1313) {
-    return 3 / 1.7;
-  }
-  if (MediaQuery.of(context).size.width >= 1313 &&
-      MediaQuery.of(context).size.width < 1385) {
-    return 3.3 / 1.7;
-  }
-  if (MediaQuery.of(context).size.width >= 1385 &&
-      MediaQuery.of(context).size.width < 1535) {
-    return 3.6 / 1.7;
-  }
-  if (MediaQuery.of(context).size.width >= 1535) {
-    return 4 / 1.7;
-  }
-
-  return 0.982 / 1.7;
-}
+// double dimensionsOfGridView(context) {
+//   if (MediaQuery.of(context).size.width >= 477 &&
+//       MediaQuery.of(context).size.width < 559) {
+//     return 1.2 / 1.7;
+//   }
+//   if (MediaQuery.of(context).size.width >= 559 &&
+//       MediaQuery.of(context).size.width < 677) {
+//     return 1.4 / 1.7;
+//   }
+//   if (MediaQuery.of(context).size.width >= 677 &&
+//       MediaQuery.of(context).size.width < 832) {
+//     return 1.7 / 1.7;
+//   }
+//   if (MediaQuery.of(context).size.width >= 832 &&
+//       MediaQuery.of(context).size.width < 962) {
+//     return 2.1 / 1.7;
+//   }
+//   if (MediaQuery.of(context).size.width >= 962 &&
+//       MediaQuery.of(context).size.width < 999) {
+//     return 2.5 / 1.7;
+//   }
+//   if (MediaQuery.of(context).size.width >= 999 &&
+//       MediaQuery.of(context).size.width < 1085) {
+//     return 2.6 / 1.7;
+//   }
+//   if (MediaQuery.of(context).size.width >= 1085 &&
+//       MediaQuery.of(context).size.width < 1146) {
+//     return 2.8 / 1.7;
+//   }
+//   if (MediaQuery.of(context).size.width >= 1146 &&
+//       MediaQuery.of(context).size.width < 1313) {
+//     return 3 / 1.7;
+//   }
+//   if (MediaQuery.of(context).size.width >= 1313 &&
+//       MediaQuery.of(context).size.width < 1385) {
+//     return 3.3 / 1.7;
+//   }
+//   if (MediaQuery.of(context).size.width >= 1385 &&
+//       MediaQuery.of(context).size.width < 1535) {
+//     return 3.6 / 1.7;
+//   }
+//   if (MediaQuery.of(context).size.width >= 1535) {
+//     return 4 / 1.7;
+//   }
+//
+//   return 0.982 / 1.7;
+// }
 
 Widget buildProductItemUi(
   ProductModel model,
