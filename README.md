@@ -1,4 +1,4 @@
-![alt text](https://firebasestorage.googleapis.com/v0/b/fir-project-ff9e0.appspot.com/o/shop_app_mockups%2F1.png?alt=media&token=165584a9-b20f-4c6a-aaaf-377caad5abf5?raw=true width="200" height="400")
+![alt text](https://firebasestorage.googleapis.com/v0/b/fir-project-ff9e0.appspot.com/o/shop_app_mockups%2F1.png?alt=media&token=165584a9-b20f-4c6a-aaaf-377caad5abf5?raw=true)
 ![alt text](https://firebasestorage.googleapis.com/v0/b/fir-project-ff9e0.appspot.com/o/shop_app_mockups%2F2.png?alt=media&token=4049931f-4b07-4fa5-9e78-6870f484eb32?raw=true)
 ![alt text](https://firebasestorage.googleapis.com/v0/b/fir-project-ff9e0.appspot.com/o/shop_app_mockups%2F3.png?alt=media&token=4d24e24c-91ca-40e3-97d0-f6103ccf0258?raw=true)
 ![alt text](https://firebasestorage.googleapis.com/v0/b/fir-project-ff9e0.appspot.com/o/shop_app_mockups%2F4.png?alt=media&token=133af431-cd1a-4ae6-9ed9-0c2a0580a8c8?raw=true)
