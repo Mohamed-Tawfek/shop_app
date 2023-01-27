@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                                           .bannerDataModel!
                                           .banners
                                           .length,
-                                      (index) => Container(
+                                      (index) => SizedBox(
                                             width: MediaQuery.of(context)
                                                 .size
                                                 .width,
